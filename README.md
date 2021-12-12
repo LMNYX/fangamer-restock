@@ -25,6 +25,7 @@ Notification:                                              #
 ```console
 
 jill@bar:~$ git clone https://github.com/LMNYX/fangamer-restock.git
+jill@bar:~$ cd fangamer-restock
 jill@bar:~$ pip install -r requirements.txt
 jill@bar:~$ python3 restock.py
 
