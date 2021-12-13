@@ -33,14 +33,18 @@ _URL = CompileURL(ConfigObject['Collection'])
 
 _LoopTimer = 0
 IsFinallyAvailable = False
+Time = int(ConfigObject['Misc']['CheckOnTimer'])
 while(not IsFinallyAvailable):
-    _tAvailability = IsAvailableToBuy(GetAvailabilityData(GetContent(_URL)))
-    if(_tAvailability):
-        dprint(f"[loop{_LoopTimer}] Available now!")
-        IsFinallyAvailable = True
-        AnnounceAvailability(ConfigObject['Notification'], _pName, ConfigObject['Collection'])
-    else:
-        dprint(f"[loop{_LoopTimer}] Still not available.")
+    try:
+        _tAvailability = IsAvailableToBuy(GetAvailabilityData(GetContent(_URL)))
+        if(_tAvailability):
+            dprint(f"[loop{_LoopTimer}] Available now!")
+            IsFinallyAvailable = True
+            AnnounceAvailability(ConfigObject['Notification'], _pName, ConfigObject['Collection'])
+        else:
+            dprint(f"[loop{_LoopTimer}] Still not available.")
+    except Exception as e:
+        dprint("Error: "+str(e))
 
     _LoopTimer += 1
-    time.sleep(ConfigObject['Misc']['CheckOnTimer'])
+    time.sleep(Time)
